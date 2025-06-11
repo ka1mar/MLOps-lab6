@@ -149,7 +149,7 @@ class AutoClusteringPipeline:
        results = model.transform(df).select("prediction", *self.numeric_columns)
        self._write_to_clickhouse(results.limit(20))
       
-       model.save(f"{self.output_path}/model")
+       model.write().overwrite().save(f"{self.output_path}/model")
 
 
    def run(self):
